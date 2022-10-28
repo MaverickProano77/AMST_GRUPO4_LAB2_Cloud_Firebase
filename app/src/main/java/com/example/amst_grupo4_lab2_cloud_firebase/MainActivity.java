@@ -32,15 +32,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-    }
-}
-=======
         mAuth = FirebaseAuth.getInstance();
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);}
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+    }
 
     ActivityResultLauncher<Intent> resultLauncher = registerForActivityResult(new
             ActivityResultContracts.StartActivityForResult(), new
@@ -61,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
-
     public void iniciarSesion(View view) {
         resultLauncher.launch(new Intent(mGoogleSignInClient.getSignInIntent())); }
 
@@ -73,12 +70,12 @@ public class MainActivity extends AppCompatActivity {
             if (task.isSuccessful()) {
                 FirebaseUser user = mAuth.getCurrentUser();
                 updateUI(user);
-                } else {
+            } else {
                 System.out.println("error");
                 updateUI(null);
-                }
-            });
-        }
+            }
+        });
+    }
 
     private void updateUI(FirebaseUser user) {
         if (user != null) {
@@ -87,5 +84,7 @@ public class MainActivity extends AppCompatActivity {
             String photo = String.valueOf(user.getPhotoUrl());
         } else {
             System.out.println("sin registrarse");
-            } }
+        } }
 }
+
+
