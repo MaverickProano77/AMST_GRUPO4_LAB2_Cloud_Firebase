@@ -23,7 +23,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+
 public class MainActivity extends AppCompatActivity {
+    FirebaseAuth mAuth;
+    GoogleSignInClient mGoogleSignInClient;
 
     FirebaseAuth mAuth;
     GoogleSignInClient mGoogleSignInClient;
