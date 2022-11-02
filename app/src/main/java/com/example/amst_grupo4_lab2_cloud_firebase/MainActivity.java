@@ -24,6 +24,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
 
+import java.util.HashMap;
+
+
 public class MainActivity extends AppCompatActivity {
     FirebaseAuth mAuth;
     GoogleSignInClient mGoogleSignInClient;
@@ -41,6 +44,13 @@ public class MainActivity extends AppCompatActivity {
                 .requestEmail()
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+        Intent intent = getIntent();
+        String msg = intent.getStringExtra("msg");
+         if(msg != null){
+             if(msg.equals("cerrarSesion")){
+                 cerrarSesion();
+                 }
+             }
     }
 
     ActivityResultLauncher<Intent> resultLauncher = registerForActivityResult(new
@@ -62,6 +72,11 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
+    private void cerrarSesion() {
+        mGoogleSignInClient.signOut().addOnCompleteListener(this,
+                task -> updateUI(null));
+        }
+
     public void iniciarSesion(View view) {
         resultLauncher.launch(new Intent(mGoogleSignInClient.getSignInIntent())); }
 
@@ -82,12 +97,22 @@ public class MainActivity extends AppCompatActivity {
 
     private void updateUI(FirebaseUser user) {
         if (user != null) {
-            String name = user.getDisplayName();
-            String email = user.getEmail();
-            String photo = String.valueOf(user.getPhotoUrl());
-        } else {
-            System.out.println("sin registrarse");
-        } }
+
+            HashMap<String, String> info_user = new HashMap<String, String>();
+            info_user.put("user_name", user.getDisplayName());
+            info_user.put("user_email", user.getEmail());
+            info_user.put("user_photo", String.valueOf(user.getPhotoUrl()));
+            info_user.put("user_id", user.getUid());
+
+            finish();
+            Intent intent = new Intent(this, PerfilUsuario.class);
+            intent.putExtra("info_user", info_user);
+            startActivity(intent);
+
+             } else {
+             System.out.println("sin registrarse");
+             }
+         }
 }
 
 
