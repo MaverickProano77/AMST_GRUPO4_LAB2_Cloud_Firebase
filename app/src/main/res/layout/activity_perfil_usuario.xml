@@ -6,6 +6,10 @@
      android:orientation="vertical"
      tools:context=".PerfilUsuario">
 
+     <Space
+         android:layout_width="match_parent"
+         android:layout_height="55dp" />
+
      <ImageView
          android:id="@+id/imv_foto"
          android:layout_width="match_parent"
@@ -13,12 +17,20 @@
          tools:ignore="ImageContrastCheck"
          tools:srcCompat="@tools:sample/avatars" />
 
+     <Space
+         android:layout_width="match_parent"
+         android:layout_height="55dp" />
+
      <TextView
      android:id="@+id/txt_userId"
      android:layout_width="match_parent"
      android:layout_height="wrap_content"
      android:gravity="center"
      android:text="@string/id" />
+
+     <Space
+         android:layout_width="match_parent"
+         android:layout_height="55dp" />
 
      <TextView
      android:id="@+id/txt_nombre"
@@ -28,6 +40,10 @@
      android:text="Nombre de usuario"
      android:textSize="30sp" />
 
+     <Space
+         android:layout_width="match_parent"
+         android:layout_height="55dp" />
+
      <TextView
      android:id="@+id/txt_correo"
      android:layout_width="match_parent"
@@ -35,6 +51,10 @@
      android:gravity="center"
      android:text="correo"
      android:textSize="18sp" />
+
+     <Space
+         android:layout_width="match_parent"
+         android:layout_height="55dp" />
 
      <Button
      android:id="@+id/btn_logout"

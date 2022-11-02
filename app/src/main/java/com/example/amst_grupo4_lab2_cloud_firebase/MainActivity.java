@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
         Intent intent = getIntent();
         String msg = intent.getStringExtra("msg");
-         if(msg != null){
+        if(msg != null){
              if(msg.equals("cerrarSesion")){
                  cerrarSesion();
                  }
@@ -73,8 +73,7 @@ public class MainActivity extends AppCompatActivity {
             });
 
     private void cerrarSesion() {
-        mGoogleSignInClient.signOut().addOnCompleteListener(this,
-                task -> updateUI(null));
+        mGoogleSignInClient.signOut().addOnCompleteListener(this, task -> updateUI(null));
         }
 
     public void iniciarSesion(View view) {

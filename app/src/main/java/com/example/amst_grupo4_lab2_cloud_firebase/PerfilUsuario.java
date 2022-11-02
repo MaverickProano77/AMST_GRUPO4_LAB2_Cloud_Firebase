@@ -4,9 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -41,18 +43,25 @@ public class PerfilUsuario extends AppCompatActivity {
         String photo = info_user.get("user_photo");
         Picasso.get().load(photo).into(imv_photo);
 
-
         iniciarBaseDeDatos();
         leerTweets();
         escribirTweets(info_user.get("user_name"));
 
     }
 
+    public void cerrarSesion(View view){
+        FirebaseAuth.getInstance().signOut();
+        finish();
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("msg", "cerrarSesion");
+        startActivity(intent);
+    }
+
         public void iniciarBaseDeDatos(){
             db_reference = FirebaseDatabase.getInstance().getReference().child("Grupos");
         }
         public void leerTweets(){
-            db_reference.child("Grupo0").child("tweets")
+            db_reference.child("Grupo4").child("tweets")
                     .addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
@@ -74,7 +83,7 @@ public class PerfilUsuario extends AppCompatActivity {
          Map<String, String> hola_tweet = new HashMap<String, String>();
          hola_tweet.put("autor", autor);
          hola_tweet.put("fecha", fecha);
-         DatabaseReference tweets = db_reference.child("Grupo0").child("tweets");
+         DatabaseReference tweets = db_reference.child("Grupo4").child("tweets");
          tweets.setValue(tweet);
          tweets.child(tweet).child("autor").setValue(autor);
          tweets.child(tweet).child("fecha").setValue(fecha);
